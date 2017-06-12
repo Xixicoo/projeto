@@ -8,15 +8,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.login;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField passwordField;
+	
+	private static ArrayList<login> users = new ArrayList<login>();
+	private static ArrayList<login> perms = new ArrayList<login>();
+	private static login currentuser;
 
 	/**
 	 * Launch the application.
@@ -73,17 +85,52 @@ public class Login extends JFrame {
 		lblPassword.setBounds(134, 232, 73, 16);
 		contentPane.add(lblPassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(228, 229, 116, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(158, 300, 97, 25);
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean logged = false;
+				for (int i = 0; i < users.size(); i++) {
+					String user = textField.getText();
+					String pw = passwordField.getText();
+					login test = new login(user, pw);
+
+					if (test.equals(users.get(i))) {
+						JOptionPane.showMessageDialog(null,
+								"Login confirmado, nível de acesso: " + perms.get(i).getAcesslevel());
+						logged = true;
+						setVisible(false);
+						currentuser = test;
+					}
+				}
+				if (logged == false) {
+					JOptionPane.showMessageDialog(null, "ID ou Password não existentes");
+				}
+			}
+});
+		btnEntrar.setBounds(93, 300, 97, 25);
 		contentPane.add(btnEntrar);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(309, 300, 97, 25);
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnSair.setBounds(340, 300, 97, 25);
 		contentPane.add(btnSair);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(228, 229, 116, 22);
+		contentPane.add(passwordField);
+		
+		JButton btnRegisto = new JButton("Registar");
+		btnRegisto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new mockups().setVisible(true);
+			}
+		});
+		btnRegisto.setBounds(219, 300, 97, 25);
+		contentPane.add(btnRegisto);
 	}
 }

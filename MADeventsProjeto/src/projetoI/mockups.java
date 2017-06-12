@@ -98,12 +98,8 @@ public class mockups extends JFrame {
 		textField_3.setColumns(10);
 		
 		JButton btnRegistar = new JButton("Registar");
-		btnRegistar.setBounds(95, 295, 97, 25);
+		btnRegistar.setBounds(174, 295, 97, 25);
 		contentPane.add(btnRegistar);
-		
-		JButton btnJTenhoUma = new JButton("J\u00E1 tenho uma conta");
-		btnJTenhoUma.setBounds(231, 295, 159, 25);
-		contentPane.add(btnJTenhoUma);
 		
 		JLabel foto = new JLabel("");
 		foto.setBounds(251, 39, 323, 270);
