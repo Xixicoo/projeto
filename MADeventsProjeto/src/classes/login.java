@@ -48,7 +48,7 @@ public class login {
 	 */
 	@Override
 	public String toString() {
-		return "login [id=" + id + ", password=" + password + ", acesslevel=" + acesslevel + "]";
+		return "login [id=" + id + ", password=" + password + ", + ]";
 	}
 
 	private int acesslevel = 1;

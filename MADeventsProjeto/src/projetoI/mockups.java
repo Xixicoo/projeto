@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.gestao;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -15,16 +18,19 @@ import java.awt.Image;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.awt.event.ActionEvent;
 
 public class mockups extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField pass;
+	private JTextField pass1;
 
 	/**
 	 * Launch the application.
@@ -67,37 +73,56 @@ public class mockups extends JFrame {
 		lblPassword.setBounds(72, 197, 74, 16);
 		contentPane.add(lblPassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(163, 194, 116, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		pass = new JTextField();
+		pass.setBounds(163, 194, 116, 22);
+		contentPane.add(pass);
+		pass.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Registo");
 		lblLogin.setFont(new Font("Cambria", Font.BOLD, 20));
 		lblLogin.setForeground(new Color(255, 69, 0));
 		lblLogin.setBackground(new Color(255, 69, 0));
-		lblLogin.setBounds(185, 56, 94, 34);
+		lblLogin.setBounds(174, 88, 94, 34);
 		contentPane.add(lblLogin);
-		
-		JLabel lblNome = new JLabel("Nome :");
-		lblNome.setBounds(95, 127, 56, 16);
-		contentPane.add(lblNome);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(163, 124, 116, 22);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
 		
 		JLabel lblRepetirPassword = new JLabel("Repetir Password :");
 		lblRepetirPassword.setBounds(41, 232, 122, 16);
 		contentPane.add(lblRepetirPassword);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(163, 229, 116, 22);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		pass1 = new JTextField();
+		pass1.setBounds(163, 229, 116, 22);
+		contentPane.add(pass1);
+		pass1.setColumns(10);
 		
 		JButton btnRegistar = new JButton("Registar");
+		btnRegistar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if ( pass.getText().equals(pass1.getText()))
+				{
+					String id = textField.getText();
+					String pw = pass.getText();
+					gestao.addUtilizadores(id, pw);
+				try {
+					gestao.saveFile();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Registado com sucesso");
+				dispose();
+				new Login().setVisible(true); 
+			}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Passwords nao sao iguais");
+				}
+				
+						
+				
+				
+			}
+		});
 		btnRegistar.setBounds(174, 295, 97, 25);
 		contentPane.add(btnRegistar);
 		

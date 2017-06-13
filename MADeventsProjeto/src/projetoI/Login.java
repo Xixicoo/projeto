@@ -61,7 +61,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel foto = new JLabel("");
-		foto.setBounds(158, -1, 259, 191);
+		foto.setBounds(158, -1, 259, 175);
 		
 		ImageIcon imagem = new ImageIcon(Main.class.getResource("/logo/LOGO FINAL.png"));
 		Image imag = imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT);
@@ -96,7 +96,7 @@ public class Login extends JFrame {
 
 					if (test.equals(users.get(i))) {
 						JOptionPane.showMessageDialog(null,
-								"Login confirmado, nível de acesso: " + perms.get(i).getAcesslevel());
+								"Login confirmado, : " + perms.get(i).getAcesslevel());
 						logged = true;
 						setVisible(false);
 						currentuser = test;
