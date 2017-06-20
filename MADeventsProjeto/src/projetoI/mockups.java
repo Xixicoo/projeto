@@ -59,81 +59,75 @@ public class mockups extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblEmail = new JLabel("E-mail :");
 		lblEmail.setBounds(95, 162, 56, 16);
 		contentPane.add(lblEmail);
-		
+
 		textField = new JTextField();
 		textField.setBounds(163, 159, 116, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblPassword = new JLabel("Password :");
 		lblPassword.setBounds(72, 197, 74, 16);
 		contentPane.add(lblPassword);
-		
+
 		pass = new JTextField();
 		pass.setBounds(163, 194, 116, 22);
 		contentPane.add(pass);
 		pass.setColumns(10);
-		
+
 		JLabel lblLogin = new JLabel("Registo");
 		lblLogin.setFont(new Font("Cambria", Font.BOLD, 20));
 		lblLogin.setForeground(new Color(255, 69, 0));
 		lblLogin.setBackground(new Color(255, 69, 0));
 		lblLogin.setBounds(174, 88, 94, 34);
 		contentPane.add(lblLogin);
-		
+
 		JLabel lblRepetirPassword = new JLabel("Repetir Password :");
 		lblRepetirPassword.setBounds(41, 232, 122, 16);
 		contentPane.add(lblRepetirPassword);
-		
+
 		pass1 = new JTextField();
 		pass1.setBounds(163, 229, 116, 22);
 		contentPane.add(pass1);
 		pass1.setColumns(10);
-		
+
 		JButton btnRegistar = new JButton("Registar");
 		btnRegistar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if ( pass.getText().equals(pass1.getText()))
-				{
+			public void actionPerformed(ActionEvent arg0) {
+				if (pass.getText().equals(pass1.getText())) {
 					String id = textField.getText();
 					String pw = pass.getText();
 					gestao.addUtilizadores(id, pw);
-				try {
-					gestao.saveFile();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					try {
+						gestao.loadFile();
+						gestao.saveFile();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Registado com sucesso");
+					dispose();
+					new Login().setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Passwords não são iguais");
 				}
-				JOptionPane.showMessageDialog(null, "Registado com sucesso");
-				dispose();
-				new Login().setVisible(true); 
-			}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Passwords nao sao iguais");
-				}
-				
-						
-				
-				
+
 			}
 		});
 		btnRegistar.setBounds(174, 295, 97, 25);
 		contentPane.add(btnRegistar);
-		
+
 		JLabel foto = new JLabel("");
 		foto.setBounds(251, 39, 323, 270);
-		
+
 		ImageIcon imagem = new ImageIcon(Main.class.getResource("/logo/LOGO FINAL.png"));
 		Image imag = imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT);
-		
+
 		foto.setIcon(new ImageIcon(imag));
-		
+
 		contentPane.add(foto);
 	}
 }

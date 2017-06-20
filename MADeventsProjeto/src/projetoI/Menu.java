@@ -12,10 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
+	private static String user;
 
 	/**
 	 * Launch the application.
@@ -24,7 +27,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
+					Menu frame = new Menu(user);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,10 +39,10 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public Menu(String user) {
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 686, 402);
+		setBounds(100, 100, 689, 405);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,6 +62,12 @@ public class Menu extends JFrame {
 		contentPane.add(foto);
 		
 		JButton btnPagamentos = new JButton("Pagamentos e Inscri\u00E7\u00F5es\r\n");
+		btnPagamentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new PagamentosIncriçoes().setVisible(true);
+			}
+		});
 		btnPagamentos.setBackground(new Color(128, 128, 128));
 		btnPagamentos.setBounds(12, 34, 187, 54);
 		contentPane.add(btnPagamentos);
@@ -69,6 +78,12 @@ public class Menu extends JFrame {
 		contentPane.add(btnConsultaDosEventos);
 		
 		JButton btnCriarEventos = new JButton("Criar Eventos");
+		btnCriarEventos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				new CriarEventos().setVisible(true);
+			}
+		});
 		btnCriarEventos.setBackground(new Color(128, 128, 128));
 		btnCriarEventos.setBounds(411, 34, 121, 54);
 		contentPane.add(btnCriarEventos);
@@ -78,13 +93,17 @@ public class Menu extends JFrame {
 		btnDivulgao.setBounds(544, 34, 112, 54);
 		contentPane.add(btnDivulgao);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(500, 224, 97, 25);
-		contentPane.add(btnNewButton);
-		
 		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(12, 224, 97, 25);
+		btnNewButton_1.setBounds(55, 160, 97, 25);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblBemVindo = new JLabel("Bem vindo");
+		lblBemVindo.setBounds(12, 13, 78, 16);
+		contentPane.add(lblBemVindo);
+		
+		JLabel nome = new JLabel("");
+		nome.setBounds(86, 13, 56, 16);
+		nome.setText(user);
+		contentPane.add(nome);
 	}
-
 }

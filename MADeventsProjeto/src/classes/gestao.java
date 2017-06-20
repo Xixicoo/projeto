@@ -7,30 +7,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class gestao {
-	private static ArrayList<login> logins = new ArrayList<login>();
-	
+	public static ArrayList<login> logins = new ArrayList<login>();
+
 	public static ArrayList<login> getUtilizadores() {
 		return logins;
-		
+
 	}
-	
+
 	public static void setUtilizadores(ArrayList<login> logins) {
 		gestao.logins = logins;
-		
+
 	}
-	
-	//adicionar novo utilizador
-	
+
+	// adicionar novo utilizador
+
 	public static login addUtilizadores(String id, String password) {
-		login newlogin = new login(id,password);
+		login newlogin = new login(id, password);
 		logins.add(newlogin);
 		return newlogin;
-		
-		
 	}
-	
+
 	public static void loadFile() throws FileNotFoundException {
-		//carrega o login do ficheiro para a memoria arraylist
+		// carrega o login do ficheiro para a memoria arraylist
 		File file = new File("utilizadores.txt");
 		Scanner input = new Scanner(file);
 		while (input.hasNextLine()) {
@@ -40,15 +38,14 @@ public class gestao {
 		}
 		input.close();
 	}
+
 	public static void saveFile() throws FileNotFoundException {
-		//carrega utilizador do array list par ao ficheiro
+		// carrega utilizador do array list par ao ficheiro
 		PrintWriter out = new PrintWriter("utilizadores.txt");
 		for (login login : logins) {
-			out.println(login.getId() + "#" + login.getPassword() + "#" );
+			out.println(login.getId() + "#" + login.getPassword() + "#");
 		}
 		out.close();
 	}
-	
-	
 
 }

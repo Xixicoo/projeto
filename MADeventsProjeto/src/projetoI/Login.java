@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classes.gestao;
 import classes.login;
 
 import javax.swing.JLabel;
@@ -41,6 +42,7 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
+					gestao.loadFile();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -88,23 +90,31 @@ public class Login extends JFrame {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
 				boolean logged = false;
-				for (int i = 0; i < users.size(); i++) {
-					String user = textField.getText();
-					String pw = passwordField.getText();
+				
+				String user = textField.getText();
+				String pw = passwordField.getText();
+				
+				for (int i = 0; i < gestao.logins.size(); i++) {
+					
 					login test = new login(user, pw);
 
-					if (test.equals(users.get(i))) {
-						JOptionPane.showMessageDialog(null,
-								"Login confirmado, : " + perms.get(i).getAcesslevel());
+					if (test.equals(gestao.logins.get(i))) {
+						JOptionPane.showMessageDialog(null, "Login confirmado");
+						
 						logged = true;
+						
 						setVisible(false);
+						new Menu(user).setVisible(true);
 						currentuser = test;
+						
 					}
 				}
 				if (logged == false) {
 					JOptionPane.showMessageDialog(null, "ID ou Password não existentes");
 				}
+				
 			}
 });
 		btnEntrar.setBounds(93, 300, 97, 25);
